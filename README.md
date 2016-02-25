@@ -1,6 +1,6 @@
-# experimento1
+#Configuración experimento1:
 
-Configuración:
+
 1. Clonar repositorio
    git clone https://github.com/mati-arq-new-g01/experimento1.git
 
