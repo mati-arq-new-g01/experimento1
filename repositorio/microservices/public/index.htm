@@ -1,0 +1,162 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html><head>
+<title>Perfil</title>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<script src="js/jquery.js" type="text/javascript"></script>
+<script type="js/javascript" src="js/jquery.min.js"></script>
+
+<script type="text/javascript" src="js/script.js"></script>
+    <style type="text/css">
+     
+      #map { width: 700px; 	height: 300px; margin: 0 auto; }
+    </style>
+
+</head>
+<body>
+
+<div class="main">
+	 <div class="content">
+		 <div class="profile">
+			 <div class="profile-top">
+				 <div class="pic-sec">
+					 <div class="pic">
+						 <img src="images/pug.jpg" alt="">
+					 </div>
+					 <div class="pic_info">
+						 <h2>Tarzan</h2>
+						 <h3>@tarzan</h3>
+					 </div>
+					 <div class="clear"></div>
+				 </div>
+				 <div class="media">
+					 <div class="tweet">
+						 <h4>2,501</h4>
+						 <h5>Guau!</h5>
+					 </div>
+					 <div class="follow">
+						 <h4>158</h4>
+						 <h5>Following</h5>
+					 </div>
+					 <div class="follow2">
+						  <h4>25,850</h4>
+						 <h5>Followers</h5>
+					 </div>
+					 <div class="clear"></div>
+				 </div>
+			 </div>
+			 
+			 
+		 </div>
+	 </div>
+	 <div id="map"></div>
+	 <!--start-copyright-->
+   		<div class="copy-right">
+   			<div class="content">
+				<p>Copyright © 2016 Universidad de los Andes <a href="http://w3layouts.com">Grupo 1</a></p>
+		</div>
+	</div>
+	<!--//end-copyright-->
+</div>	
+
+ <script type="text/javascript">
+
+var map;
+function initMap() {
+
+
+	
+	$.ajax({
+	  url: "http://localhost/api/pets/findRiskZone?uname=fdf",
+	  dataType: "json",
+	  success: function (data) {
+		console.log(data);
+	  },
+      error: function(xhr, ajaxOptions, thrownError) {
+       console.log(xhr);
+	   console.log(ajaxOptions);
+	   console.log(thrownError);
+      }
+	});
+
+  var directionsService = new google.maps.DirectionsService;
+  var directionsDisplay = new google.maps.DirectionsRenderer;
+  
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 16,
+    center: {lat: 4.65781, lng: -74.09341},
+    mapTypeId: google.maps.MapTypeId.TERRAIN
+  });
+  
+  directionsDisplay.setMap(map);  
+ 
+  directionsService.route({
+    origin: {lat: 4.66139, lng: -74.09715},
+    destination: {lat: 4.66600, lng: -74.06410},
+    travelMode: google.maps.TravelMode.DRIVING
+	},function(response, status) {
+		if (status === google.maps.DirectionsStatus.OK) {
+		  directionsDisplay.setDirections(response);
+		} else {
+		  window.alert('Directions request failed due to ' + status);
+	}
+  });
+ 
+    var goldStar = {
+    path: 'M359.568,327.246L191.511,21.818c-2.197-3.993-6.395-6.474-10.952-6.474c-4.558,0-8.754,2.481-10.952,6.474L1.549,327.246    c-2.131,3.872-2.058,8.582,0.191,12.388c2.249,3.805,6.34,6.139,10.76,6.139h336.117c4.421,0,8.512-2.334,10.761-6.139    C361.627,335.828,361.699,331.118,359.568,327.246z M33.646,320.772L180.559,53.773l146.913,266.999H33.646z M164.894,143.085v90.351c0,8.65,7.014,15.665,15.665,15.665c8.65,0,15.665-7.015,15.665-15.665v-90.351    c0-8.651-7.015-15.665-15.665-15.665C171.908,127.42,164.894,134.435,164.894,143.085z M180.559,265.364c-9.097,0-16.5,7.399-16.5,16.5c0,9.098,7.403,16.5,16.5,16.5c9.097,0,16.5-7.402,16.5-16.5    C197.059,272.764,189.655,265.364,180.559,265.364z',
+    fillColor: 'red',
+    fillOpacity: 0.8,
+    scale: 0.05,
+    strokeColor: 'red',
+    strokeWeight: 1
+  };
+
+  
+  var marker = new google.maps.Marker({
+    position: {lat: 4.66061, lng: -74.09341},
+    icon: goldStar,
+    map: map
+  });
+  
+   var marker2 = new google.maps.Marker({
+    position: {lat: 4.65781, lng: -74.09393},
+    icon: goldStar,
+    map: map
+  });
+  
+    var marker3 = new google.maps.Marker({
+    position: {lat: 4.65894, lng: -74.09539},
+    icon: goldStar,
+    map: map
+  });
+    
+    var marker4 = new google.maps.Marker({
+    position: {lat: 4.65757, lng: -74.09659},
+    icon: goldStar,
+    map: map
+  });
+  
+    var marker5 = new google.maps.Marker({
+    position: {lat: 4.65612, lng: -74.09698},
+    icon: goldStar,
+    map: map
+  });
+  
+  
+
+}
+
+    </script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzJXc4694BoBvbxucoggi3G9oP2-S0eqI&callback=initMap">
+    </script>
+
+</body></html>

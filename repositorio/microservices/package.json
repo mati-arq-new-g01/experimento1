@@ -1,0 +1,15 @@
+{
+  "name": "microservicio",
+  "version": "1.0.0",
+  "description": "microservicio",
+  "author": "oi.estrada",
+  "license": "uniandes",
+  "dependencies": {
+    "seneca": "0.6.2",
+    "express": "*",
+    "body-parser": "*"
+  },
+  "scripts": {
+  	"start": "node server.js"
+  }
+}
