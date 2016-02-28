@@ -1,5 +1,4 @@
-#Configuración experimento1:
-
+##Configuración experimento1:
 
 
 1. Clonar repositorio
@@ -34,16 +33,18 @@
   
   	exit
 
-#Ingresar a:
-#Microservicios
+##Validaciones:
+###Microservicios
 http://localhost:3000/act?api=dogs&cmd=risk&uname=tarzan
 
-#Api-gateway
+###Api-gateway
 http://localhost:8080/explorer/#!/pet/pet_findRiskZone
 
-#Front
+###Front
 http://localhost/public/index.htm?uname=toby
+
 http://localhost/public/index.htm?uname=boby
+
 http://localhost/public/index.htm?uname=chester
 
 
