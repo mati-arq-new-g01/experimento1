@@ -1,41 +1,68 @@
 module.exports = function service(options) {
 
 
-  this.add({ api: 'dogs', cmd: 'risk' }, findRisk)
+this.add({ api: 'dogs', cmd: 'risk' }, findRisk)
+this.add({ api: 'dogs', cmd: 'count' }, totalPets)
 
 	var seneca = require('seneca')()
 		seneca.use('mongo-store',{
 	  name:'test',
-	  host:'127.0.0.1',
+	  host:'172.17.0.2',
 	  port:27017
 	});
+
+
 	
   function findRisk(msg, respond) {
-	 
-	  //Guardar modelo pet
-	 var pet2 = seneca.make$('pet');
-
-/*	  
-	  var pet = seneca.make$('pet')
-	 // pet.id = 'shaggy'
-	  pet.type  = 'cat'
-	  pet.uname = msg.uname;
-	  pet.latitude = msg.latitude;
-	  pet.longitude = msg.longitude;
-	  pet.displayName = 'Shaggy';
-	  //pet.markers = '[{lat: 4.66600, lng: -74.06410} ,{lat: 4.65781, lng: -74.09393},{lat: 4.65894, lng: -74.09539},{lat: 4.65757, lng: -74.09659},{lat: 4.65612, lng: -74.09698}]';
-	  //pet.riskSite = '[{ displayName : "Parque Simón Bolivar",  point : {lat: 4.65781, lng: -74.09341 },   evacuation : {         origin: {lat: 4.66139, lng: -74.09715},        destination: {lat: 4.66600, lng: -74.06410}    }]';
-	  
-
-
-	 pet.save$(function(err,pet){
-		if( err ) return console.log(err);
-		respond( null, { respond: pet });
-	  })
-	*/
-
-	pet2.load$({id: msg.uname}, function (err, pet2) { 
-		respond( null, pet2);
+	 var pet = seneca.make$('pet');
+	pet.load$({id: msg.uname}, function (err, pet) { 
+		respond( null, pet);
 	});
   }
+
+
+
+  function totalPets(msg, respond) {
+
+
+    var MongoClient = require('mongodb').MongoClient;
+        var assert = require('assert');
+        var url = 'mongodb://172.17.0.2/test';
+	var pet = seneca.make$('pet');
+
+	MongoClient.connect(url, function(err, db) {
+	  assert.equal(null, err);
+	 
+	 findConsumos(db, function() {
+	      db.close();
+	  });
+
+	});
+
+	var findConsumos = function(db, callback) {
+
+
+		var aggregateQuery = [
+		  {
+		    $group: { _id: "$cust_id", count: { $sum: 1 } }
+		  },
+		  {
+		    $match: { count: { $gt: 1 } }
+		  }
+		];
+
+		pet.native$(function (err, db) {
+  		var collection = db.collection('pet');
+		collection.aggregate(aggregateQuery, function (err, list) {
+        	if (err) return done(err);
+		respond(null, list);
+	    		});
+		});
+
+
+	};
+    }
+
+
+
 }

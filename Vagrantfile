@@ -12,6 +12,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, :guest => 8080, :host => 8080
   config.vm.network :forwarded_port, :guest => 80, :host => 80
   config.vm.provision :shell, path: "install.sh"
-  config.vm.provision :shell, path: "keys.sh"
   config.vm.synced_folder "repositorio/", "/home/vagrant"
 end

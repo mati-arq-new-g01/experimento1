@@ -7,13 +7,23 @@
 2. Ir a la raiz del directorio donde se descargaron los fuentes y ejecutar y ejecutar el comando
    vagrant up
 
-3. Subir instancia del microservicio
-	
-	docker exec -it microservices bash
+
+3. Subir instancia de Mongo
+
+	docker exec -it petsdb bash
 
 	mongod &
 	
-  	cd /home/microservices/
+	mongoimport --db test --collection pet --file /home/petsdb/petsf.json
+	
+	exit
+
+   
+3. Subir instancia del microservicio
+	
+	docker exec -it microservices bash
+	
+  	cd /home/pets/
   
   	node server.js &
   	
@@ -23,7 +33,7 @@
 
 	docker exec -it apigateway bash
   	
-	cd /usr/local/api-gateway
+	cd /home/apigateway/
 		
   	node . &
   
